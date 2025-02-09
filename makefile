@@ -1,7 +1,7 @@
 
 #!/usr/bin/make -f
 
-# 11/13/22 Jud Cole GitHub profile Web site make configuration
+# 02/08/25 Jud Cole GitHub profile Web site make configuration
 
 CURRENT_DATE:=$(shell date +%F)
 CURRENT_DATE_TIME:=$(shell date +%FT%T%Z)
@@ -13,18 +13,23 @@ help:
 	@egrep -oh '[0-9a-zA-Z_\.\-]+:.*?@ .*' $(MAKEFILE_LIST) | \
 	awk 'BEGIN {FS = ":.*?@ "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' | sort
 
-# build: @ Build the Web site
+# build: @ Build the Web site by copying the build folder from the portfolio project
 build: clean
-	cp -prv ../websites/jc-website/build/* .
+	cp -prv ../jc-portfolio/build/* .
 
 # clean: @ Clean up all generated files
 clean:
-	rm -fr _app
-	rm -fr images
-	rm -fr about.html
-	rm -fr favicon.png
-	rm -fr index.html
-	rm -fr vite-manifest.json
+	rm -fr _astro
+	rm -fr blog
+	rm -fr projects
+	rm -fr resume
+	rm -fr services
+	rm -fr store
+	rm -f *.html
+	rm -f *.svg
+	rm -f *.txt
+	rm -f *.webp
+	rm -f *.xml
 
 # deploy: @ Build and deploy the Web site to the live site
 deploy: build
