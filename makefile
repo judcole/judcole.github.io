@@ -1,19 +1,21 @@
 
 #!/usr/bin/make -f
 
-# 02/08/25 Jud Cole GitHub profile Web site make configuration
+# 02/09/25 Jud Cole GitHub profile Web site make configuration
 
 CURRENT_DATE:=$(shell date +%F)
 CURRENT_DATE_TIME:=$(shell date +%FT%T%Z)
 
 .PHONY: build clean deploy zip
 
+# spell-checker: ignore webp
+
 # help: @ List the available make tasks
 help:
-	@egrep -oh '[0-9a-zA-Z_\.\-]+:.*?@ .*' $(MAKEFILE_LIST) | \
+	@grep -Eho '[0-9a-zA-Z_\.\-]+:.*?@ .*' $(MAKEFILE_LIST) | \
 	awk 'BEGIN {FS = ":.*?@ "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' | sort
 
-# build: @ Build the Web site by copying the build folder from the portfolio project
+# build: @ Build the Web site by copying from the portfolio project
 build: clean
 	cp -prv ../jc-portfolio/build/* .
 
